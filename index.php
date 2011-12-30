@@ -19,23 +19,16 @@
  * 
  */
 session_start();
-include ("inc/define.php");
-include (CONF);
-include (MODEL);
-include (VIEW);
-include (CONTROLLER);
-$driver = tcake_controller::database('mysql');
-$driver->connect($host,$user,$pass);
-$driver->db($db);
-$setting_query = $driver->db_select("setting");
-while ($setting = mysql_fetch_array($setting_query)){
-	css_ui($setting[content_themes]);
-	$themes = $setting[themes];
-}
-if (isset($_SESSION[md5_user])) {
-	themes_show($themes);
-}
-else {
-	themes_login($themes);
-}
-?>
+define('PATH', dirname(__FILE__) . '/');
+define('DIR','stain/');
+define('HOSTNAME',"http://".$_SERVER['HTTP_HOST']."/".DIR);
+define('MODULE', PATH . 'module/');
+define('TCAKE', PATH . 'tcake/');
+define('THEMES', PATH . 'themes/');
+define('VIEW', PATH . 'apps/view/');
+define('MODEL', PATH . 'apps/model/');
+define('CONTROLLER', PATH . 'apps/controller/');
+require_once TCAKE . 'gen.php';
+require_once MODEL . 'index.php';
+require_once VIEW . 'index.php';
+//require_once CONTROLLER . 'index.php';

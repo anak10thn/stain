@@ -1,0 +1,241 @@
+
+/**
+ *      This program is free software; you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation; either version 2 of the License, or
+ *      (at your option) any later version.
+ *      
+ *      This program is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
+ *      
+ *      You should have received a copy of the GNU General Public License
+ *      along with this program; if not, write to the Free Software
+ *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ *      MA 02110-1301, USA.
+ * 
+ * 2011 (c) GPL
+ * Ibnu Yahya <ibnu.yahya@toroo.org>
+ **/
+
+table, input, select, textarea {
+	font: 11px/20px Verdana, sans-serif;
+}
+#result { background-color: #F0FFED; border: 1px solid #215800; padding: 5px auto; margin: 7px 5px 7px 5px auto; font-weight:bold;}
+#result p{
+	margin: 5px 0 5px 0;
+	text-align:center;
+}
+#nodata { background-color: #9ECDFB; border: 1px solid #1E90FF; padding: 5px auto; margin: 7px 5px 7px 5px auto;}
+#nodata h3{
+	margin: 5px 0 5px 0;
+	text-align:center;
+	 font-weight:bold;
+}
+		fieldset {
+			overflow:hidden;
+			border:0;
+			*height:30px;	
+			margin:3px;
+		}
+		
+		fieldset label {
+			display:block;
+			width:140px;
+			float:left;
+			font-weight:700;
+			color:#666;	
+			line-height:2.2em;
+			text-align:right
+		}
+		
+		fieldset input {
+			float:left;
+			border:1px solid #ccc;	
+			height: 20px;
+			padding:3px;
+			width:250px;
+			font-size:12px;
+		}
+		fieldset select {
+			float:left;
+			border:1px solid #ccc;	
+			height: 25px;
+			padding:3px;
+			width:260px;
+			font-size:12px;
+			background: #ffffff;
+		}
+		fieldset textarea {
+		
+			float:left;
+			border:1px solid #ccc;	
+			height: 100px;
+			padding:3px;
+			width:250px;
+			font-size:12px;
+			background: #ffffff;
+		}
+		fieldset input:hover {
+			background: #ccc;
+		}
+		fieldset select:hover {
+			background: #ccc;
+		}
+		fieldset textarea:hover {
+			background: #ccc;
+		}
+		.effect {
+			border-radius: 5px;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;	
+		}
+		.tombol { padding: 3px; border: 1px solid #ccc; }
+		
+		#button {
+			float:right;
+			margin: 0 auto;
+			padding-right: 0px;	
+		}
+		
+		#button input {
+			border:2px solid #ccc;	
+			width:60px;
+			font-size:12px;
+			font-weight:bold;
+		}
+		
+		#tombol {
+			float:right;
+			margin: 0 auto;
+			padding-right: 0px;	
+		}
+		
+		#tombol input {
+			border:2px solid #ccc;	
+			width:60px;
+			font-size:12px;
+			font-weight:bold;
+		}
+		.status{
+			color: #A52A2A;
+		}
+
+
+/*FORM LOGIN*/
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
+  
+#boxes .window {
+  position:absolute;
+  left:0;
+  top:0;
+  width:440px;
+  height:200px;
+  display:none;
+  z-index:9999;
+  padding:20px;
+}
+
+#boxes #login {
+  width:375px; 
+  height:203px;
+}
+
+#login .d-header {
+  background:url(images/login-header.png) no-repeat 0 0 transparent; 
+  width:375px; 
+  height:150px;
+}
+
+#login .d-header input {
+  position:relative;
+  top:60px;
+  left:100px;
+  border:3px solid #cccccc;
+  height:22px;
+  width:200px;
+  font-size:15px;
+  padding:5px;
+  margin-top:4px;
+}
+
+#login .d-blank {
+  float:left;
+  background:url(images/login-blank.png) no-repeat 0 0 transparent; 
+  width:267px; 
+  height:53px;
+}
+
+#login .d-login {
+  float:left;
+  width:108px; 
+  height:53px;
+}
+
+#form {
+	float:right;
+	margin: 0 auto;
+	padding-right: 20px;
+}
+
+#kotakdialog {
+	margin: 5px auto;
+}
+
+tr.header {
+	background:#01305a;
+	color:#FFFFFF;
+	font-weight:bold;
+}
+tr.header td{
+	text-align:center;
+	padding:5px 10px 5px 10px;
+}
+tr.ganjil {
+	background:#0580EC;
+	color:#FFFFFF;
+}
+tr.ganjil:hover {
+	background:#01305a;
+}
+tr.ganjil td{
+	padding-left:5px;
+}
+tr.genap {
+	background:#0B6DC2;
+	color:#FFFFFF;
+}
+tr.genap:hover {
+	background:#01305a;
+}
+tr.genap td{
+	padding-left:5px;
+}
+#loadingimg {
+	margin:0 auto;
+	padding:0 auto;
+	width:100%;
+	border:1px;
+	border-color:#05026F
+}
+tr.color:hover {
+background:#D2D2D2;
+}
+select.select {
+			float:left;
+			border:1px solid #ccc;	
+			height: 25px;
+			padding:3px;
+			width:300px;
+			font-size:12px;
+			background: #ffffff;
+			margin-right:13px;
+		}
