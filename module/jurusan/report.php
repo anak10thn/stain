@@ -19,36 +19,17 @@
  * 
  */
 defined('PATH') or die('Can\'t access!');
+include ("tcake/config.php");
+$tmpl = new tmpl();
+$controller = new tcake_controller();
+$controller->driver();
+$db = new db($_CONFIG['host'],$_CONFIG['user'],$_CONFIG['pass'],$_CONFIG['dbase']);
+$db->query("select * from jurusan");
+$extract = $db->extract();
+$path = explode("/",$_SERVER['PATH_INFO']);
+echo "<div id='dialog' title='Form Input'>";
+new msg("msg","<spin id='output'></spin>");
+include "module/".$path[2]."/form.php";
+echo "</div>";
+echo $tmpl->table(array("Kode Jurusan","Nama Jurusan","Edit"),$extract,array("kd_jurusan","jurusan"),"id_jurusan");
 
-
-
-if (!isset($_SESSION[user])) {	
-	$tpl = new tcake_view('themes/toroo/login.html');
-}else {
-	$tpl = new tcake_view('themes/toroo/main.html');
-}
-
-
-if ($tpl) {
-	$title = "System Informasi Akademik STAIN Palu";
-	$nav = $tpl-> navigator(array('Home' => HOSTNAME.'index.php', 'Logout' => HOSTNAME.'index.php/logout'));
-	$define = array (
-				'head_nav' => $nav, 
-				'title' => $title,
-				'style' => $style,
-				'script' => $script,
-				'jq_content' => $jq_content,
-				'menujq' => $menujq,
-				'menunav' => $menunav,
-				'tabsjq' => $tabsjq,
-				'hostname' => HOSTNAME,
-				'css' => $css,
-				'form_css' => $form_css,
-				'stylecss' => $stylecss,
-				'stylelogin' => $stylelogin,
-				'scriptlogin' => $scriptlogin,
-				'content' => $content
-                );
-	$tpl-> define_tag($define);
-	$tpl-> show_themes();
-}

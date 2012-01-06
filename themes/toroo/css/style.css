@@ -99,13 +99,13 @@ blockquote ul li ul li {
 /* form elements */
 form {
 }
-input[type="text"],
+/*input[type="text"],
 input[type="password"] {
 	padding:2px;
 	border:1px solid #eee;
 	font: normal 1em Verdana, sans-serif;
 	color:#777;
-}
+}*/
 textarea {
 	/*width:400px;*/
 	padding:2px;
@@ -115,7 +115,7 @@ textarea {
 	display:block;
 	color:#777;
 }
-input[type="text"]:hover,
+/*input[type="text"]:hover,
 input[type="password"]:hover,
 textarea:hover {
 	border:1px solid #c6c6c6;
@@ -135,7 +135,7 @@ input[type="button"]:hover,
 input[type="submit"]:hover { 
 	border: none;
 	background: #8EB50C url(../images/button-hover.gif) repeat-x 0 0;
-}
+}*/
 form img {
 	border:1px solid #eee;
 }
@@ -405,3 +405,8 @@ form img:hover {
 #menunavigator h3 {color: #333333;}
 #menunavigator a {color:#333; text-decoration:none}
 #menunavigator a:hover {color:#1E90FF; text-decoration:none}
+
+#home { padding: 0.4em; position: relative; background: #fff; }
+#home h3 {color: #333333;}
+#home a {color:#333; text-decoration:none}
+#home a:hover {color:#1E90FF; text-decoration:none}

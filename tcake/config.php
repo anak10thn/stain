@@ -18,7 +18,6 @@
  * 		created by ibnu yahya <ibnu.yahya@toroo.org>
  * 
  */
-defined('PATH') or die('Can\'t access!');
 
 $_CONFIG['driver'] = "mysql";
 $_CONFIG['host'] = "localhost";

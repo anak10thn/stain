@@ -19,36 +19,29 @@
  * 
  */
 defined('PATH') or die('Can\'t access!');
+include ("tcake/config.php");
+$login = new tcake_controller();
+$login->driver();
+$mysql = new db($_CONFIG['host'],$_CONFIG['user'],$_CONFIG['pass'],$_CONFIG['dbase']);
+
+$pass = md5($_POST[pass]);
+$user = $_POST[user];
+
+$mysql->query("select * from login where iduser='$user'");
 
 
-
-if (!isset($_SESSION[user])) {	
-	$tpl = new tcake_view('themes/toroo/login.html');
-}else {
-	$tpl = new tcake_view('themes/toroo/main.html');
+$extract = $mysql->extract();
+foreach ($extract as $ceklogin) {
+	if ($ceklogin) {
+		if ($ceklogin[iduser] == $_POST[user] &&  $ceklogin[password] == $pass) {
+			$_SESSION[user] = $ceklogin[iduser];
+			$login->direct(HOSTNAME."index.php");	
+		}
+		else {
+			$login->dialogbox("Password yang anda masukan salah!!");
+			$login->direct(HOSTNAME."index.php");	
+		}
+	}
 }
 
 
-if ($tpl) {
-	$title = "System Informasi Akademik STAIN Palu";
-	$nav = $tpl-> navigator(array('Home' => HOSTNAME.'index.php', 'Logout' => HOSTNAME.'index.php/logout'));
-	$define = array (
-				'head_nav' => $nav, 
-				'title' => $title,
-				'style' => $style,
-				'script' => $script,
-				'jq_content' => $jq_content,
-				'menujq' => $menujq,
-				'menunav' => $menunav,
-				'tabsjq' => $tabsjq,
-				'hostname' => HOSTNAME,
-				'css' => $css,
-				'form_css' => $form_css,
-				'stylecss' => $stylecss,
-				'stylelogin' => $stylelogin,
-				'scriptlogin' => $scriptlogin,
-				'content' => $content
-                );
-	$tpl-> define_tag($define);
-	$tpl-> show_themes();
-}

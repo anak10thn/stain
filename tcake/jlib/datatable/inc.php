@@ -19,7 +19,7 @@
  * 
  */
 ?>
-<link rel="stylesheet" href="<?php echo HOSTNAME;?>jlib/datatable/css/demo_page.css" type="text/css"/>
-<link rel="stylesheet" href="<?php echo HOSTNAME;?>jlib/datatable/css/demo_table_jui.css" type="text/css"/>
-<script type="text/javascript" src="<?php echo HOSTNAME;?>jlib/datatable/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="<?php echo HOSTNAME;?>tcake/jlib/datatable/css/demo_page.css" type="text/css"/>
+<link rel="stylesheet" href="<?php echo HOSTNAME;?>tcake/jlib/datatable/css/demo_table_jui.css" type="text/css"/>
+<script type="text/javascript" src="<?php echo HOSTNAME;?>tcake/jlib/datatable/js/jquery.dataTables.js"></script>
 

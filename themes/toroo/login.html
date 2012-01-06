@@ -98,9 +98,9 @@
 		<img class="mahasiswa" src="[hostname]themes/toroo/images/icon/mahasiswa.png" title="Option form login 'MAHASISWA', masukan NIM dan PASSWORD anda!">
 		
 		<div id="loginadmin">
-		<form method="post" action="inc/login.php/admin" name="subscribeForm">
+		<form method="post" action="index.php/login" name="subscribeForm">
 			<fieldset>
-				<label>Username: </label><input type="text" name="user">
+				<label>Username: </label><input type="text" name="user"><input type="hidden" name="userid" value="admin">
 			</fieldset>
 
 			<fieldset>
@@ -114,9 +114,9 @@
 		</div>
 		
 		<div id="logindosen">
-		<form method="post" action="inc/login.php/dosen" name="subscribeForm">
+		<form method="post" action="index.php/login" name="subscribeForm">
 			<fieldset>
-				<label>N I P: </label><input type="text" name="user">
+				<label>N I P: </label><input type="text" name="user"><input type="hidden" name="userid" value="dosen">
 			</fieldset>
 
 			<fieldset>
@@ -166,9 +166,9 @@
 		</div>
 		
 		<div id="loginmahasiswa">
-		<form method="post" action="inc/login.php/mahasiswa" name="subscribeForm">
+		<form method="post" action="index.php/login" name="subscribeForm">
 			<fieldset>
-				<label>N I M: </label><input type="text" name="user">
+				<label>N I M: </label><input type="text" name="user"><input type="hidden" name="userid" value="mahasiswa">
 			</fieldset>
 
 			<fieldset>

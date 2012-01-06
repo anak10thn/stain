@@ -19,10 +19,19 @@
  * 
  */
 defined('PATH') or die('Can\'t access!');
-
 class jquery_ext {
 	function menu() {
 		$menu = "$(\"#menunav\").accordion();";
+		$menu .= "$('input:submit').button();";
+		$menu .= "$('#example').dataTable({
+					\"bJQueryUI\": true,
+					\"sPaginationType\": \"full_numbers\"
+				});";
+		/*$menu .= "$( \"#dialog\" ).dialog({
+			autoOpen: false,
+			show: \"blind\",
+			hide: \"explode\"
+		});";*/
 		return $menu;
 	}
 	function tabs() {
@@ -32,6 +41,13 @@ class jquery_ext {
 			}
 		});";
 		return $tabs;
+	}
+	function content($content) {
+		ob_start();
+		include "module/".$content."/js.php";
+		$jq_content = ob_get_contents();
+		ob_end_clean();
+		return $jq_content;
 	}
 }
 class tmpl {
@@ -45,6 +61,89 @@ class tmpl {
 		$nav .= "</ul>
 		</div>";
 		return $nav;
+	}
+	
+	function home() {
+		$nav = "<div id=\"home\" class=\"ui-widget-content ui-corner-all\">
+		<h3 class=\"ui-widget-header ui-corner-all\">Home</h3>
+		";
+
+		$nav .= "<p>Aplikasi ini merupakan sistem yang berisi tentang kegiatan akademik padaSTAIN Datokarama Palu yang dapat memberikan informasi tentang segala sesuatu yang berhubungan dengan kegiatan akademik, perkuliahan, data diri Dosen maupun Mahasiswa. Untuk masuk anda dapat memilih pilihan gambar Login yang tertera di samping kanan, memasukan Username dan Password anda, kemudian menekan tombol login. Jika mengalami kesulitan silahkan menghubungi admin di siakad@stain-palu.ac.id atau bagian Akademik dan Kemahasiswaan.
+Silahkan memilih icon pada bagian kanan Admin, Dosen atau Mahasiswa. Aplikasi ini dalam pengembangan dan akan terus diperbaharui setiap hari sesuai kebutuhan.</p>";
+
+		$nav .= "
+		</div>";
+		return $nav;
+	}
+	
+	function tabs($link) {
+		ob_start();
+		echo "<div id='tabs'><ul>";
+		foreach ($link as $url => $content) {
+			$url_replace = str_replace(" ","",$url);
+			$url_uc = ucfirst($url);
+			if (file_exists($content)) {
+				echo "<li><a href='#".$url_replace."'>".$url_uc."</a></li>";
+			}
+		}
+		echo "</ul>";
+		foreach($link as $url => $content) {
+			$url_replace = str_replace(" ","",$url);
+			echo "<div id='".$url_replace."'>";
+			if (file_exists($content)) {
+				include $content;
+			}
+			echo "</div>";
+		}
+		echo "</div>"; 
+		$tabs = ob_get_contents();
+		ob_end_clean();
+		return $tabs;
+	}
+	
+	function add() {
+		echo 	"<div class=\"ui-state-default ui-corner-all\" title=\".ui-icon-circle-plus\">
+				<input type='submit' value='+Tambah Data' id='add' class=\"ui-icon-circle-plus\">
+				</div>";
+	}
+	
+	function table($field,$record,$fieldx,$id) {
+		ob_start();
+		$this->add();
+		echo ("
+		<div class='demo_jui'>
+		<table cellpadding='0' cellspacing='0' border='0' class='display' id='example'>
+		<thead>
+		<tr>");
+		foreach ($field as $field_data) {
+			echo ("<th>".$field_data."</th>");
+		}
+		echo ("</tr>
+		</thead><tbody>");
+		foreach ($record as $xrecord) {
+		if ($xrecord) {
+			echo ("<tr class='gradeC' id='".$xrecord[$id]."'>");
+				foreach ($fieldx as $fieldxx) {
+					echo ("<td>".$xrecord[$fieldxx]."</td>");
+				}
+				//<input type='submit' value='Delete' id='delete' name='".$xrecord[$id]."'>
+					echo ("<td width='75'><input type='submit' value='Update' id='rubah' update='".$xrecord[$id]."'");
+					
+				foreach ($fieldx as $fieldxx2) {
+					echo (" ".$fieldxx2."='".$xrecord[$fieldxx2]."' ");
+				}
+					
+					echo ("></td>");
+			echo ("</tr>");
+			}
+		}
+		
+		echo ("
+		</tbody></table></div>");
+		$table = ob_get_contents();
+		ob_end_clean();
+		return $table;
+		
 	}
 }
 class module extends tmpl {
@@ -67,62 +166,28 @@ class module extends tmpl {
 		closedir($handle);
 		return $array_getfile;
 	}
+	
+	
 }
 
-class login extends tcake_model {
-	private $path;
-	function __construct() {
-		$mysql = parent::driver();
-		//$mysql->query("select * from user");
-		$this->path = parent::path();
-		$pass = md5($_POST['pass']);
-		if ($path[1] == login) {
-			if($path[2] == "admin") {
-				$query = db_select("admin");
-				while ($login = mysql_fetch_array($query)){
-					if ($login[user] == $_POST['user'] && $login[pass] == $pass) {
-								$_SESSION[md5_user] = md5($_POST['user']);
-								$_SESSION[user] = $_POST['user'];
-								direct(HOSTNAME."index.php");
-					}
-					else { dialogbox_direct("Password atau Username salah!",HOSTNAME."index.php"); }
-				}
-			}
-			else if($path[2] == "dosen") {
-				$query = db_select("logindosen");
-				while ($login = mysql_fetch_array($query)){
-					if ($login[user] == $_POST['user'] && $login[pass] == $pass) {
-						$_SESSION[md5_user] = md5($_POST['user']);
-						$_SESSION[user] = $_POST['user'];
-						direct(HOSTNAME."index.php");	
-					}
-					else { dialogbox_direct("Password atau Username salah!",HOSTNAME."index.php"); }
-				}
-			}
-			else if($path[2] == "mahasiswa") {
-				$query = db_select("loginmahasiswa");
-				while ($login = mysql_fetch_array($query)){
-					if ($login[user] == $_POST['user'] && $login[pass] == $pass) {
-						$_SESSION[md5_user] = md5($_POST['user']);
-						$_SESSION[user] = $_POST['user'];
-						direct(HOSTNAME."index.php");			
-					}
-					else { dialogbox_direct("Password atau Username salah!",HOSTNAME."index.php"); }
-				}
-			}
-		} else {
-			
-		}
+class msg {
+	function __construct($div,$msg) {
+		echo "<div id=\"".$div."\" class=\"ui-state-highlight ui-corner-all\" style=\"margin-top: 20px; padding: 0 .7em;\"> 
+		<p><span class=\"ui-icon ui-icon-info\" style=\"float: left; margin-right: .3em;\"></span>
+			".$msg."</p>
+		</div>";
 	}
 }
 
+$load = new load();
+$load->_all();
 $css = HOSTNAME."themes/toroo/css/default.css";
 $stylecss = HOSTNAME."themes/toroo/css/style.css";
+$form_css = HOSTNAME."themes/toroo/css/form.css";
 $stylelogin = HOSTNAME."themes/toroo/css/login.css";
-
 $model = new tcake_model();
 $style = $model->style();
-$script = $model->js('jquery').$model->ui().$model->js('jquery.cookie');
+$script = $model->js('jquery').$model->ui().$model->js('jquery.cookie').$model->jlib('datatable');
 $scriptlogin = $model->js('jquery.opt');
 
 $jq = new jquery_ext();
@@ -131,7 +196,18 @@ $tabsjq = $jq->tabs();
 
 $module = new module();
 foreach ($module->get() as $mdl) {
-	$firstmdl = ucfirst($mdl);
-	$getmdl[$firstmdl] = "index.php/module/$mdl";
+	$firstmdl_replace = str_replace("_"," ",$mdl);
+	$firstmdl = ucwords($firstmdl_replace);
+	$getmdl[$firstmdl] = HOSTNAME."index.php/module/$mdl";
 }
+$path_content = explode("/",$_SERVER['PATH_INFO']);
 $menunav = $module->menunav('menunavigator','Menu',$getmdl);
+
+if ($path_content[1] == "module" && $path_content[2])
+{
+	$jq_content = $jq->content($path_content[2]);
+	$content = $module->tabs(array('report' => "module/".$path_content[2]."/report.php", 'export' => "module/".$path_content[2]."/export.php",'import' => "module/".$path_content[2]."/import.php"));
+} else if (!$path_content[1] && !$path_content[1]) {
+	$jq_content = "";
+	$content = $module->home();
+}

@@ -18,37 +18,19 @@
  * 		created by ibnu yahya <ibnu.yahya@toroo.org>
  * 
  */
-defined('PATH') or die('Can\'t access!');
+include "../../tcake/config.php";
+include "../../tcake/driver/mysql.php";
+$sql = new db($_CONFIG['host'],$_CONFIG['user'],$_CONFIG['pass'],$_CONFIG['dbase']);
 
-
-
-if (!isset($_SESSION[user])) {	
-	$tpl = new tcake_view('themes/toroo/login.html');
-}else {
-	$tpl = new tcake_view('themes/toroo/main.html');
+if ($_GET['update'] == "no") {
+	$sql->query("insert into jurusan (kd_jurusan,jurusan) value ('$_GET[kd_jurusan]','$_GET[jurusan]')");
+	echo "Data berhasil diinput!";
 }
-
-
-if ($tpl) {
-	$title = "System Informasi Akademik STAIN Palu";
-	$nav = $tpl-> navigator(array('Home' => HOSTNAME.'index.php', 'Logout' => HOSTNAME.'index.php/logout'));
-	$define = array (
-				'head_nav' => $nav, 
-				'title' => $title,
-				'style' => $style,
-				'script' => $script,
-				'jq_content' => $jq_content,
-				'menujq' => $menujq,
-				'menunav' => $menunav,
-				'tabsjq' => $tabsjq,
-				'hostname' => HOSTNAME,
-				'css' => $css,
-				'form_css' => $form_css,
-				'stylecss' => $stylecss,
-				'stylelogin' => $stylelogin,
-				'scriptlogin' => $scriptlogin,
-				'content' => $content
-                );
-	$tpl-> define_tag($define);
-	$tpl-> show_themes();
+else if (!$_GET['update'] && $_GET['delete'] == 'yes') {
+	$sql->query("delete jurusan where id_jurusan='$_GET[id]'");
+	echo "Data berhasil didelete!";
+}
+else{
+	$sql->query("update jurusan set kd_jurusan='$_GET[kd_jurusan]',jurusan='$_GET[jurusan]' where id_jurusan='$_GET[update]'");
+	echo "Data berhasil diupdate!!";
 }

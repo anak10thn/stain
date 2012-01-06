@@ -29,6 +29,5 @@ define('VIEW', PATH . 'apps/view/');
 define('MODEL', PATH . 'apps/model/');
 define('CONTROLLER', PATH . 'apps/controller/');
 require_once TCAKE . 'gen.php';
-require_once MODEL . 'index.php';
-require_once VIEW . 'index.php';
-//require_once CONTROLLER . 'index.php';
+$load = new load();
+$load->_default();

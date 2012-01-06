@@ -18,12 +18,17 @@
  * 		created by ibnu yahya <ibnu.yahya@toroo.org>
  * 
  */
-defined('PATH') or die('Can\'t access!');
+//defined('PATH') or die('Can\'t access!');
 class db {
-	private $host,$user,$pass,$dbase,$status;
+	public $host,$user,$pass,$dbase,$status;
 	public $query,$count,$ext;
 	
 	function __construct($host,$user,$pass,$dbase) {
+		/*require_once TCAKE . 'config.php';
+		$this->host = $_CONFIG['host'];
+		$this->user = $_CONFIG['user'];
+		$this->pass = $_CONFIG['pass'];
+		$this->dbase = $_CONFIG['dbase'];*/
 		$this->host = $host;
 		$this->user = $user;
 		$this->pass = $pass;
